@@ -80,20 +80,16 @@ DROP TABLE IF EXISTS `tables`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tables` (
-  `NomTable` varchar(10) NOT NULL,
-  `NomBDD` varchar(10) NOT NULL,
-  `Proprietaire` varchar(45) DEFAULT NULL,
-  `Taille` int(11) DEFAULT NULL COMMENT 'Taille de la table (redondant ?)',
-  `NbrChampsPK` int(11) DEFAULT NULL COMMENT 'Nombre de champs définissant la clé primaire',
-  `NbrFK` int(11) DEFAULT NULL COMMENT 'Nombre de clés étrangères',
+  `NomTable` varchar(16) NOT NULL,
+  `NomBDD` varchar(16) NOT NULL,
+  `Proprietaire` varchar(45) NOT NULL,
   `NbrTuples` int(11) DEFAULT NULL COMMENT 'Nombre de tuples dans la table.',
   `NbrAttributs` int(11) DEFAULT NULL COMMENT 'Nombre d''attributs dans la table',
   `DateCreation` date DEFAULT NULL COMMENT 'Date de création de la table.',
   `DateDerniereModif` date DEFAULT NULL COMMENT 'Date de dernière modif de la table.',
-  `NbrValeurNull` int(11) DEFAULT NULL COMMENT 'Nombre de valeur nulle',
   `NbrDoublons` int(11) DEFAULT NULL COMMENT 'Nombre de doublons',
   `NbrAttributsValeurConstante` int(11) DEFAULT NULL COMMENT '???',
-  PRIMARY KEY (`NomTable`,`NomBDD`),
+  PRIMARY KEY (`NomTable`,`NomBDD`,`Proprietaire`),
   KEY `Nom_idx` (`NomBDD`),
   CONSTRAINT `Nom` FOREIGN KEY (`NomBDD`) REFERENCES `base_de_donnee` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -117,4 +113,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-19  4:09:31
+-- Dump completed on 2014-11-19 17:37:01
