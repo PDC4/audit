@@ -73,6 +73,59 @@ LOCK TABLES `colonnes` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `server`
+--
+
+DROP TABLE IF EXISTS `server`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `server` (
+  `Nom` varchar(16) NOT NULL,
+  `RAM` int(11) DEFAULT NULL COMMENT 'Mémoire vive.',
+  `EspaceTotal` int(11) DEFAULT NULL COMMENT 'Espace disque total',
+  `Processeur` varchar(45) DEFAULT NULL,
+  `Localisation` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`Nom`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `server`
+--
+
+LOCK TABLES `server` WRITE;
+/*!40000 ALTER TABLE `server` DISABLE KEYS */;
+/*!40000 ALTER TABLE `server` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sgbd`
+--
+
+DROP TABLE IF EXISTS `sgbd`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sgbd` (
+  `Nom` varchar(16) NOT NULL,
+  `Server` varchar(16) NOT NULL,
+  `Type` varchar(16) DEFAULT NULL,
+  `Version` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`Nom`,`Server`),
+  KEY `Nom_idx` (`Server`),
+  CONSTRAINT `NomServer` FOREIGN KEY (`Server`) REFERENCES `server` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sgbd`
+--
+
+LOCK TABLES `sgbd` WRITE;
+/*!40000 ALTER TABLE `sgbd` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sgbd` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tables`
 --
 
@@ -113,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-19 17:37:01
+-- Dump completed on 2014-11-20 10:44:46
