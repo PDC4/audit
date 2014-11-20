@@ -83,8 +83,10 @@ CREATE TABLE `server` (
   `Nom` varchar(16) NOT NULL,
   `RAM` int(11) DEFAULT NULL COMMENT 'Mémoire vive.',
   `EspaceTotal` int(11) DEFAULT NULL COMMENT 'Espace disque total',
+  `EspaceUtilise` int(11) DEFAULT NULL,
   `Processeur` varchar(45) DEFAULT NULL,
   `Localisation` varchar(45) DEFAULT NULL,
+  `OS` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`Nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -156,6 +158,31 @@ LOCK TABLES `tables` WRITE;
 /*!40000 ALTER TABLE `tables` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tables` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `Identifiant` varchar(16) NOT NULL,
+  `NomSGBD` varchar(16) NOT NULL,
+  PRIMARY KEY (`Identifiant`,`NomSGBD`),
+  KEY `UsersNomSGBD_idx` (`NomSGBD`),
+  CONSTRAINT `UsersNomSGBD` FOREIGN KEY (`NomSGBD`) REFERENCES `sgbd` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -166,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-20 11:07:36
+-- Dump completed on 2014-11-20 11:23:57
