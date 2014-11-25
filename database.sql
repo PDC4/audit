@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: pdc4
 -- ------------------------------------------------------
--- Server version	5.6.21-log
+-- Server version	5.6.21-enterprise-commercial-advanced-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -101,6 +101,34 @@ LOCK TABLES `server` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `serveur`
+--
+
+DROP TABLE IF EXISTS `serveur`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `serveur` (
+  `Nom_serveur` varchar(10) NOT NULL,
+  `Consommation_RAM (To)` int(11) DEFAULT NULL,
+  `Consommation_CPU(Go)` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Nom_serveur`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `serveur`
+--
+
+LOCK TABLES `serveur` WRITE;
+/*!40000 ALTER TABLE `serveur` DISABLE KEYS */;
+INSERT INTO `serveur` VALUES ('S1',400,4);
+INSERT INTO `serveur` VALUES ('S2',500,6);
+INSERT INTO `serveur` VALUES ('S3',300,8);
+INSERT INTO `serveur` VALUES ('S4',400,9);
+/*!40000 ALTER TABLE `serveur` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `sgbd`
 --
 
@@ -193,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-25 14:36:16
+-- Dump completed on 2014-11-25 15:03:03
