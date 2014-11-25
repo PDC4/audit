@@ -1,0 +1,11 @@
+SET ECHO OFF;
+SET FEEDBACK OFF;
+SET SERVEROUTPUT ON;
+SET VERIFY OFF;
+SET PAGES 0;
+SET HEAD OFF;
+
+SPOOL D:\Code\audit\Test.sql
+Select "INSERT TO tables VALUES" table_name, owner FROM dba_all_tables;
+SPOOL OFF 
+
