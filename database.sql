@@ -188,6 +188,34 @@ LOCK TABLES `tables` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `test-defaut`
+--
+
+DROP TABLE IF EXISTS `test-defaut`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `test-defaut` (
+  `name` int(11) NOT NULL,
+  `nemedef` varchar(45) DEFAULT 'salma',
+  `age` int(11) DEFAULT '50',
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test-defaut`
+--
+
+LOCK TABLES `test-defaut` WRITE;
+/*!40000 ALTER TABLE `test-defaut` DISABLE KEYS */;
+INSERT INTO `test-defaut` VALUES (1,'salma',50);
+INSERT INTO `test-defaut` VALUES (2,'salma',50);
+INSERT INTO `test-defaut` VALUES (3,'mourad',64);
+INSERT INTO `test-defaut` VALUES (4,'zejli',15);
+/*!40000 ALTER TABLE `test-defaut` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -221,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-25 15:03:03
+-- Dump completed on 2014-11-26 10:43:33
