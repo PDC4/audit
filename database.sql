@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: pdc4
 -- ------------------------------------------------------
--- Server version	5.6.21-enterprise-commercial-advanced-log
+-- Server version	5.6.21-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,9 +23,11 @@ DROP TABLE IF EXISTS `base_de_donnee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `base_de_donnee` (
-  `Nom` varchar(10) NOT NULL COMMENT 'Nom de la BDD.',
-  `NbrTable` int(11) NOT NULL DEFAULT '0' COMMENT 'Nombre de tables dans la BDD.',
-  PRIMARY KEY (`Nom`)
+  `Nom` varchar(16) NOT NULL COMMENT 'Nom de la BDD.',
+  `NomInstance` varchar(16) NOT NULL,
+  PRIMARY KEY (`Nom`,`NomInstance`),
+  KEY `BDD Instance_idx` (`NomInstance`),
+  CONSTRAINT `BDD Instance` FOREIGN KEY (`NomInstance`) REFERENCES `instance` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table contenant la totalité des bases de données.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -70,6 +72,33 @@ CREATE TABLE `colonnes` (
 LOCK TABLES `colonnes` WRITE;
 /*!40000 ALTER TABLE `colonnes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `colonnes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `instance`
+--
+
+DROP TABLE IF EXISTS `instance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `instance` (
+  `Nom` varchar(16) NOT NULL,
+  `Server` varchar(16) NOT NULL,
+  `Type` varchar(16) DEFAULT NULL,
+  `Version` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`Nom`,`Server`),
+  KEY `Nom_idx` (`Server`),
+  CONSTRAINT `NomServer` FOREIGN KEY (`Server`) REFERENCES `server` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `instance`
+--
+
+LOCK TABLES `instance` WRITE;
+/*!40000 ALTER TABLE `instance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `instance` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -129,33 +158,6 @@ INSERT INTO `serveur` VALUES ('S4',400,9);
 UNLOCK TABLES;
 
 --
--- Table structure for table `sgbd`
---
-
-DROP TABLE IF EXISTS `sgbd`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sgbd` (
-  `Nom` varchar(16) NOT NULL,
-  `Server` varchar(16) NOT NULL,
-  `Type` varchar(16) DEFAULT NULL,
-  `Version` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`Nom`,`Server`),
-  KEY `Nom_idx` (`Server`),
-  CONSTRAINT `NomServer` FOREIGN KEY (`Server`) REFERENCES `server` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sgbd`
---
-
-LOCK TABLES `sgbd` WRITE;
-/*!40000 ALTER TABLE `sgbd` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sgbd` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tables`
 --
 
@@ -170,11 +172,14 @@ CREATE TABLE `tables` (
   `NbrAttributs` int(11) DEFAULT NULL COMMENT 'Nombre d''attributs dans la table',
   `DateCreation` date DEFAULT NULL COMMENT 'Date de création de la table.',
   `DateDerniereModif` date DEFAULT NULL COMMENT 'Date de dernière modif de la table.',
-  `NbrDoublons` int(11) DEFAULT NULL COMMENT 'Nombre de doublons',
+  `NbrDoublonsRelatif` int(11) DEFAULT NULL COMMENT 'Nombre de doublons',
+  `NbrDoublonsAbsolu` int(11) DEFAULT NULL,
   `NbrAttributsValeurConstante` int(11) DEFAULT NULL COMMENT '???',
   PRIMARY KEY (`NomTable`,`NomBDD`,`Proprietaire`),
   KEY `Nom_idx` (`NomBDD`),
-  CONSTRAINT `Nom` FOREIGN KEY (`NomBDD`) REFERENCES `base_de_donnee` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `TableUsers_idx` (`Proprietaire`),
+  CONSTRAINT `Nom` FOREIGN KEY (`NomBDD`) REFERENCES `base_de_donnee` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `TableUsers` FOREIGN KEY (`Proprietaire`) REFERENCES `users` (`Identifiant`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -224,10 +229,10 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `Identifiant` varchar(16) NOT NULL,
-  `NomSGBD` varchar(16) NOT NULL,
-  PRIMARY KEY (`Identifiant`,`NomSGBD`),
-  KEY `UsersNomSGBD_idx` (`NomSGBD`),
-  CONSTRAINT `UsersNomSGBD` FOREIGN KEY (`NomSGBD`) REFERENCES `sgbd` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `NomInstance` varchar(16) NOT NULL,
+  PRIMARY KEY (`Identifiant`,`NomInstance`),
+  KEY `UsersNomSGBD_idx` (`NomInstance`),
+  CONSTRAINT `UsersNomInstance` FOREIGN KEY (`NomInstance`) REFERENCES `instance` (`Nom`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -249,4 +254,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-26 10:43:33
+-- Dump completed on 2014-11-30 12:51:46
