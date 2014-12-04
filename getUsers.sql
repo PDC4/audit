@@ -5,6 +5,6 @@ SET VERIFY OFF;
 SET PAGES 0;
 SET HEAD OFF;
 
-SPOOL D:\Code\audit\Test.sql
+SPOOL D:\Code\audit\TestUsers.sql
 Select 'INSERT INTO users VALUES (''', USERNAME, ''',''3IF'') ;' FROM all_users;
 SPOOL OFF 
