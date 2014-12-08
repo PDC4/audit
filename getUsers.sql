@@ -6,5 +6,5 @@ SET PAGES 0;
 SET HEAD OFF;
 
 SPOOL D:\Code\audit\TestUsers.sql
-Select 'INSERT INTO users VALUES (trim(''', USERNAME, '''),''3IF'') ;' FROM all_users;
+Select 'INSERT INTO users VALUES (trim(''', USERNAME, '''),''Liris'') ;' FROM all_users;
 SPOOL OFF 

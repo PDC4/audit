@@ -5,22 +5,15 @@ SET VERIFY OFF;
 SET PAGES 0;
 SET HEAD OFF;
 
-SPOOL /home/qdunoyer/audit/Test.sql
+SPOOL D:\CODE\audit\Test1.sql
 SELECT DISTINCT 'SET ECHO OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET FEEDBACK OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET SERVEROUTPUT ON;' FROM dba_all_tables;
 SELECT DISTINCT 'SET VERIFY OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET PAGES 0;' FROM dba_all_tables;
 SELECT DISTINCT 'SET HEAD OFF;' FROM dba_all_tables;
-SELECT DISTINCT 'SPOOL /home/qdunoyer/audit/Result.sql' FROM dba_all_tables;
-SELECT DISTINCT 'SELECT DISTINCT ''SET ECHO OFF;'' FROM dba_all_tables;
-SELECT DISTINCT ''SET FEEDBACK OFF;'' FROM dba_all_tables;
-SELECT DISTINCT ''SET SERVEROUTPUT ON;'' FROM dba_all_tables;
-SELECT DISTINCT ''SET VERIFY OFF;'' FROM dba_all_tables;
-SELECT DISTINCT ''SET PAGES 0;'' FROM dba_all_tables;
-SELECT DISTINCT ''SET HEAD OFF;'' FROM dba_all_tables;
-SELECT DISTINCT ''SPOOL D:\Code\audit\Update.sql'' FROM dba_all_tables;' FROM dba_all_tables;
-SELECT 	 'SELECT ''UPDATE tables SET NbrTuples='',COUNT(*),'' WHERE Nom=trim(''''',
+SELECT DISTINCT 'SPOOL D:\CODE\audit\Result1.sql' FROM dba_all_tables;
+SELECT 	 'SELECT ''UPDATE tables SET NbrTuples='',COUNT(*),'' WHERE NomTable=trim(''''',
 		TABLE_NAME,
 		''''') and NomBDD=''''3IF'''' and Proprietaire=trim(''''',
 		OWNER,
@@ -28,7 +21,7 @@ SELECT 	 'SELECT ''UPDATE tables SET NbrTuples='',COUNT(*),'' WHERE Nom=trim('''
 		OWNER,
 		'.',
 		TABLE_NAME,
-		'; SELECT ''UPDATE tables SET NbrAttributs='',COUNT(*),'' WHERE Nom=trim(''''',
+		'; SELECT ''UPDATE tables SET NbrAttributs='',COUNT(*),'' WHERE NomTable=trim(''''',
 		TABLE_NAME,
 		''''') and NomBDD=''''3IF'''' and Proprietaire=trim(''''',
 		OWNER,
@@ -36,7 +29,7 @@ SELECT 	 'SELECT ''UPDATE tables SET NbrTuples='',COUNT(*),'' WHERE Nom=trim('''
 		TABLE_NAME,
 		''') and OWNER=trim(''',
 		OWNER,
-		'''); SELECT ''UPDATE tables SET DateCreation=STR_TO_DATE('',CREATED,'',''%d/%M/%y'') WHERE Nom=trim(''''',
+		'''); SELECT ''UPDATE tables SET DateCreation=STR_TO_DATE('''''',CREATED,'''''',''''%d/%m/%y'''') WHERE NomTable=trim(''''',
 		TABLE_NAME,
 		''''') and NomBDD=''''3IF'''' and Proprietaire=trim(''''',
 		OWNER,
@@ -55,8 +48,12 @@ WHERE 	OWNER!='SYS'
 		and OWNER!='LBACSYS' 
 		and OWNER!='MDSYS' 
 		and OWNER!='ORDSYS' 
-		and OWNER!='TSMSYS';
-SELECT DISTINCT 'SELECT DISTINCT ''SPOOL OFF'' FROM dba_all_tables;' FROM dba_all_tables;
+		and OWNER!='TSMSYS'
+		and OWNER!='XDB'
+		and OWNER!='WMSYS'
+		and OWNER!='SYSMAN'
+		and (iot_type IS NULL 
+		or iot_type != 'IOT_OVERFLOW');
 SELECT DISTINCT 'SPOOL OFF' FROM dba_all_tables;
 
 SPOOL OFF 
