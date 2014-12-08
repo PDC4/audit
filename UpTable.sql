@@ -5,14 +5,14 @@ SET VERIFY OFF;
 SET PAGES 0;
 SET HEAD OFF;
 
-SPOOL D:\Code\audit\Test.sql
+SPOOL /home/qdunoyer/audit/Test.sql
 SELECT DISTINCT 'SET ECHO OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET FEEDBACK OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET SERVEROUTPUT ON;' FROM dba_all_tables;
 SELECT DISTINCT 'SET VERIFY OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET PAGES 0;' FROM dba_all_tables;
 SELECT DISTINCT 'SET HEAD OFF;' FROM dba_all_tables;
-SELECT DISTINCT 'SPOOL D:\Code\audit\Result.sql' FROM dba_all_tables;
+SELECT DISTINCT 'SPOOL /home/qdunoyer/audit/Result.sql' FROM dba_all_tables;
 SELECT DISTINCT 'SELECT DISTINCT ''SET ECHO OFF;'' FROM dba_all_tables;
 SELECT DISTINCT ''SET FEEDBACK OFF;'' FROM dba_all_tables;
 SELECT DISTINCT ''SET SERVEROUTPUT ON;'' FROM dba_all_tables;
