@@ -38,6 +38,7 @@ CREATE TABLE `base_de_donnee` (
 LOCK TABLES `base_de_donnee` WRITE;
 /*!40000 ALTER TABLE `base_de_donnee` DISABLE KEYS */;
 INSERT INTO `base_de_donnee` VALUES ('3IF','3IF');
+INSERT INTO `base_de_donnee` VALUES ('Liris','3IF');
 /*!40000 ALTER TABLE `base_de_donnee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5035,4 +5036,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-04 16:48:40
+-- Dump completed on 2014-12-08  2:24:10
