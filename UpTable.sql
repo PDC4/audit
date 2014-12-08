@@ -13,13 +13,13 @@ SELECT DISTINCT 'SET VERIFY OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET PAGES 0;' FROM dba_all_tables;
 SELECT DISTINCT 'SET HEAD OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SPOOL /home/qdunoyer/audit/Result.sql' FROM dba_all_tables;
-SELECT DISTINCT 'SELECT DISTINCT ''SET ECHO OFF;'' FROM dba_all_tables;
+/*SELECT DISTINCT 'SELECT DISTINCT ''SET ECHO OFF;'' FROM dba_all_tables;
 SELECT DISTINCT ''SET FEEDBACK OFF;'' FROM dba_all_tables;
 SELECT DISTINCT ''SET SERVEROUTPUT ON;'' FROM dba_all_tables;
 SELECT DISTINCT ''SET VERIFY OFF;'' FROM dba_all_tables;
 SELECT DISTINCT ''SET PAGES 0;'' FROM dba_all_tables;
 SELECT DISTINCT ''SET HEAD OFF;'' FROM dba_all_tables;
-SELECT DISTINCT ''SPOOL D:\Code\audit\Update.sql'' FROM dba_all_tables;' FROM dba_all_tables;
+SELECT DISTINCT ''SPOOL D:\Code\audit\Update.sql'' FROM dba_all_tables;' FROM dba_all_tables;*/
 SELECT 	 'SELECT ''UPDATE tables SET NbrTuples='',COUNT(*),'' WHERE Nom=trim(''''',
 		TABLE_NAME,
 		''''') and NomBDD=''''3IF'''' and Proprietaire=trim(''''',
