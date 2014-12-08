@@ -5,14 +5,14 @@ SET VERIFY OFF;
 SET PAGES 0;
 SET HEAD OFF;
 
-SPOOL /home/qdunoyer/audit/Test.sql
+SPOOL D:\Code\audit\Test.sql
 SELECT DISTINCT 'SET ECHO OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET FEEDBACK OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET SERVEROUTPUT ON;' FROM dba_all_tables;
 SELECT DISTINCT 'SET VERIFY OFF;' FROM dba_all_tables;
 SELECT DISTINCT 'SET PAGES 0;' FROM dba_all_tables;
 SELECT DISTINCT 'SET HEAD OFF;' FROM dba_all_tables;
-SELECT DISTINCT 'SPOOL /home/qdunoyer/audit/Result.sql' FROM dba_all_tables;
+SELECT DISTINCT 'SPOOL D:\Code\audit\Result.sql' FROM dba_all_tables;
 SELECT DISTINCT 'SELECT DISTINCT ''SET ECHO OFF;'' FROM dba_all_tables;
 SELECT DISTINCT ''SET FEEDBACK OFF;'' FROM dba_all_tables;
 SELECT DISTINCT ''SET SERVEROUTPUT ON;'' FROM dba_all_tables;
@@ -22,7 +22,7 @@ SELECT DISTINCT ''SET HEAD OFF;'' FROM dba_all_tables;
 SELECT DISTINCT ''SPOOL D:\Code\audit\Update.sql'' FROM dba_all_tables;' FROM dba_all_tables;
 SELECT 	 'SELECT ''UPDATE tables SET NbrTuples='',COUNT(*),'' WHERE Nom=trim(''''',
 		TABLE_NAME,
-		''''') and NomBDD=''''3IF'''' and Proprietaire=trim(''''',
+		''''') and NomBDD=''''MYBDD'''' and Proprietaire=trim(''''',
 		OWNER,
 		''''');'' FROM ',
 		OWNER,
@@ -30,7 +30,7 @@ SELECT 	 'SELECT ''UPDATE tables SET NbrTuples='',COUNT(*),'' WHERE Nom=trim('''
 		TABLE_NAME,
 		'; SELECT ''UPDATE tables SET NbrAttributs='',COUNT(*),'' WHERE Nom=trim(''''',
 		TABLE_NAME,
-		''''') and NomBDD=''''3IF'''' and Proprietaire=trim(''''',
+		''''') and NomBDD=''''MYBDD'''' and Proprietaire=trim(''''',
 		OWNER,
 		''''');'' FROM DBA_TAB_COLUMNS WHERE TABLE_NAME=trim(''',
 		TABLE_NAME,
@@ -38,7 +38,7 @@ SELECT 	 'SELECT ''UPDATE tables SET NbrTuples='',COUNT(*),'' WHERE Nom=trim('''
 		OWNER,
 		'''); SELECT ''UPDATE tables SET DateCreation=STR_TO_DATE('',CREATED,'',''%d/%M/%y'') WHERE Nom=trim(''''',
 		TABLE_NAME,
-		''''') and NomBDD=''''3IF'''' and Proprietaire=trim(''''',
+		''''') and NomBDD=''''MYBDD'''' and Proprietaire=trim(''''',
 		OWNER,
 		''''');''FROM DBA_OBJECTS WHERE OBJECT_NAME=trim(''',
 		TABLE_NAME,
